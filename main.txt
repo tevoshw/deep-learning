@@ -1,0 +1,7 @@
+Perceptron/MLP -> Dasdos tabulares, AutoEncoders, RL
+CNN -> Classificação de imagens, Detecção de objetos, Reconhecimento Facial, Visão em EDGE AI, Reconhecimento Médico por imagens, Controle de qualidade industrial
+RNN -> Series temporais
+LSTM/GRU -> Series temporais, Sinais Biomédicos, 
+Transformers -> Textos, BERT, Visao (VIT), Audio e Fala, MultiModal, Grafos
+GAN -> Geração de Imagens, Image-To-Image, SuperResolução, Data Augmentation
+Difussion -> Text-To-Image, Edição de fotos, Geração de video, Geração de Audio

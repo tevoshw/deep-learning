@@ -12,20 +12,21 @@ import numpy as np
 from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler 
 
-# 1. Preparação dos dados
+# Get the data
 dataset = load_breast_cancer()
 X = dataset.data
 y = dataset.target.reshape(-1, 1)
 
-# NORMALIZAÇÃO: Essencial para redes neurais
+# Normalization the data
 scaler = StandardScaler()
 X = scaler.fit_transform(X)
 
+# Split
 X_train, X_test = X[:400], X[400:]
 y_train, y_test = y[:400], y[400:]
 
 
-
+# A single neuron
 class Model:
     def __init__(self, input_size):
         # Define the bias and weights
@@ -58,9 +59,8 @@ class Model:
         y_hat = self.sigmoid(z)
         return y_hat
 
-
+# Train logic
 model = Model(input_size=dataset.data.shape[1])
-
 for epoch in range(100):
 
     # Forward pass

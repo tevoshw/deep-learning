@@ -7,6 +7,24 @@
 5. Estudo do modelo já pronto
 
 ## 1. Memory & Infrastructur
+### Basis
+First thing to understand it's the basis of hardware, in the world of computing, both the CPU and the GPU are crucial processing units, but they were designed for completely different tasks. While one focuses on intelligence and command, the other focuses on brute force and repetition.
+
+#### 1. O que é a CPU? (Central Processing Unit)
+A CPU é o "cérebro" do computador. Ela é responsável por executar o sistema operacional e controlar todos os outros componentes. Sua principal característica é a versatilidade: ela consegue lidar com qualquer tipo de instrução, desde cálculos matemáticos até a lógica complexa de um software de edição ou um navegador web.
+
+- Arquitetura: Poucos núcleos (cores), mas extremamente potentes e rápidos.
+- Tipo de Processamento: Sequencial (uma tarefa por vez, em altíssima velocidade).
+- Ponto forte: Baixa latência e tomada de decisão lógica complexa (instruções "se... então").
+
+#### 2. O que é a GPU? (Graphics Processing Unit)
+A GPU começou como um processador especializado apenas em renderizar gráficos de vídeo (daí o nome). No entanto, percebeu-se que sua arquitetura é perfeita para cálculos matemáticos massivos. Ela não tenta ser "inteligente" como a CPU, mas é incrivelmente eficiente em fazer a mesma coisa milhares de vezes ao mesmo tempo.
+
+- Arquitetura: Milhares de núcleos (cores) pequenos e especializados.
+- Tipo de Processamento: Paralelo (milhares de tarefas simples executadas simultaneamente).
+- Ponto forte: Alta vazão (throughput) de dados e processamento de matrizes.
+
+### 1.1. The RAM vs VRAM
 Hierarquia de memória — entender por que VRAM > RAM > disco em termos de velocidade/custo te ajuda a tomar decisões de onde colocar dados, usar memory-mapped files, etc.
 Bandwidth vs Latência — a diferença entre os dois explica por que operações matriciais são "memory-bound" em certos cenários e "compute-bound" em outros. Isso aparece direto em profiling com torch.profiler.
 HBM vs GDDR vs DDR — os tipos de memória que aparecem nas specs de GPUs (H100, A100, RTX 4090). Saber a diferença te ajuda a interpretar benchmarks.
@@ -15,13 +33,17 @@ O que você pode pular:
 Timing de RAM, overclocking, slots físicos — isso não agrega nada para ML/dados.
 Sugestão de caminho:
 Os artigos do blog da Hugging Face sobre "model memory anatomy" e as docs do PyTorch sobre CUDA memory management cobrem exatamente o que você precisa, já no contexto de ML — sem rodeios de hardware puro.
-### 1.1 VRAM Usage (Allocated vs Reserved)
-**VRAM (Video RAM) is the dedicated memory of the GPU, used to arm the data that the graphics processor needs to access quickly.**
 
 ### 1.2 Dtypes & Memory Precision
-- Tipos de dados (float16, 32, 64)
+1. Bit: 0 ou 1, permite sequência de até 8 bits
+2. Byte: Uma sequência de 8 bits
+- Tipos de dados (bit p sinal, bit pra expoente, bit para fração), sempre representam quantos bits ocupam na memória
+* **Float16:** Suporta com segurança 3 a 4 casas decimais, ocupa 16bits/2bytes na memória
+* **Float32:** Suporta com segurança 7 casas decimais, ocupa 32bits/4bytes na memória
+* **Float64:** Suporta com segurança 15 a 17 casas decimais, ocupa 64bits/8bytes na memória
 - Impacto na VRAM
 - Quantização (Reduzir tipo de dado 32 -> 16)
+
 ### 1.3 Peak VRAM Consumption
 - Max que o VRAM aguenta antes de morrer
 
